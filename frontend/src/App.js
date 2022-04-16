@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ListHeader from "./components/ListHeader";
 import ListItem from "./components/ListItem";
+import "./App.css";
 
 const App = () => {
   const [toDoList, setToDoList] = useState([]);
@@ -43,7 +44,7 @@ const App = () => {
     <div className="app-container">
       <div className="list-container">
         <ListHeader />
-        <ul>
+        <ul className="item-list">
           {toDoList.map((item) => (
             <ListItem
               key={item.id}

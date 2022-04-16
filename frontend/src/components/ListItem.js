@@ -1,19 +1,23 @@
 import React from "react";
 
 export default function ListItem({ item, updateTaskStatus }) {
-  let className = "item";
+  let itemClassName = "item";
   if (item.done) {
-    className += " is-done";
+    itemClassName += " is-done";
   }
 
   return (
-    <>
+    <div className="item-container">
+      <label class="checkbox-container">
+        <input type="checkbox" checked={item.done} />
+        <span class="checkmark"></span>
+      </label>
       <li
-        className={className}
+        className={itemClassName}
         onClick={(e) => updateTaskStatus(e, item.id)}
       >
         {item.text}
       </li>
-    </>
+    </div>
   );
 }
