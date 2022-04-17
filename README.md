@@ -25,6 +25,36 @@ npm run start
 
 The client will be displayed at port 3000 while the server will be listening at port 3001.
 
+## Folder structure
+
+```
+.
+├── backend
+│   ├── index.js              # Entry point
+│   ├── server
+│   │   └── index.js          # Middlewares
+│   ├── routes
+│   │    └── index.js         # Express routing (URI and HTTP request)
+│   ├── src
+│   │   └── toDoList.json     # Initial tasks source
+│   └── test                  # Tests
+│
+└── frontend
+    ├── src
+    │   ├── index.js          # Entry point, application is mounted
+    │   ├── App.js            # Render ListView 
+    │   ├── containers
+    │   │   └── ListView.js   # Fetch API to connect with server, error message and mapping tasks as a list
+    │   ├── components
+    │   │   ├── ListHeader.js # Simple header text
+    │   │   └── ListItem.js   # Render list item with checkbox, text
+    │   ├── App.css           # CSS rules
+    │   └── test              # Tests
+    │
+    └── assets                # Background image
+        
+```        
+
 ## Testing
 To run test with coverage:
 - In frontend
