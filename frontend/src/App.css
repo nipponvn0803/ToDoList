@@ -134,7 +134,7 @@ body {
 
 
 /* Show the checkmark when checked */
-
+/* General sibling combinator  */
 .checkbox-container input:checked~.checkmark:after {
     display: block;
 }

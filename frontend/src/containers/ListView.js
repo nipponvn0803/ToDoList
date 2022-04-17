@@ -4,16 +4,23 @@ import ListItem from "../components/ListItem";
 
 export default function ListView() {
   const [toDoList, setToDoList] = useState([]);
+  const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
     async function getToDoList() {
-      await fetch(`http://localhost:5000/`)
-        .then((response) => response.json())
+      await fetch(`http://localhost:3001/`)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          setErrorText("Fail to fetch tasks list.");
+          throw new Error("Fail to fetch tasks list.");
+        })
         .then((data) => {
-          setToDoList(data);
+          return setToDoList(data);
         })
         .catch((error) => {
-          window.alert(error);
+          setErrorText("Fail to fetch tasks list.");
           return;
         });
     }
@@ -22,18 +29,22 @@ export default function ListView() {
     return;
   }, []);
 
-  const updateTaskStatus = async (e, taskId) => {
-    e.preventDefault();
-
-    await fetch(`http://localhost:5000/update/${taskId}`, {
+  const updateTaskStatus = async (taskId) => {
+    await fetch(`http://localhost:3001/update/${taskId}`, {
       method: "POST",
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        setErrorText("Fail to update task.");
+        throw new Error("Fail to update task.");
+      })
       .then((data) => {
-        setToDoList(data);
+        return setToDoList(data);
       })
       .catch((error) => {
-        window.alert(error);
+        setErrorText("Fail to update task.");
         return;
       });
   };
@@ -42,6 +53,7 @@ export default function ListView() {
     <div className="app-container">
       <div className="list-container">
         <ListHeader />
+        <p data-testid="error-text">{errorText}</p>
         <ul className="item-list">
           {toDoList.map((item) => (
             <ListItem

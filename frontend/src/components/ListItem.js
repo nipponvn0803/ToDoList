@@ -7,18 +7,21 @@ export default function ListItem({ item, updateTaskStatus }) {
   }
 
   return (
-    <div className="item-container">
+    <div className="item-container" data-testid="item-container">
       <label className="checkbox-container">
         <input
           type="checkbox"
           checked={item.done}
-          onChange={(e) => updateTaskStatus(e, item.id)}
+          data-checked={item.done}
+          onChange={() => updateTaskStatus(item.id)}
+          data-testid="item-checkbox"
         />
         <span className="checkmark"></span>
       </label>
       <li
         className={itemClassName}
-        onClick={(e) => updateTaskStatus(e, item.id)}
+        onClick={() => updateTaskStatus(item.id)}
+        data-testid="item-text"
       >
         {item.text}
       </li>
