@@ -1,72 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
-
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
 }
 
 #root {
-    display: flex;
+  display: flex;
 }
 
 .app-container {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    min-width: 100%;
-    height: 100vh;
-    background-image: url('../assets/background.jpg');
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-width: 100%;
+  height: 100vh;
+  background-image: url('../assets/background.jpg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .list-container {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    height: 90%;
-    max-width: 600px;
-    background: #fff;
-    margin: 120px auto;
-    border-radius: 5px;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 90%;
+  max-width: 600px;
+  background: #fff;
+  margin: 120px auto;
+  border-radius: 5px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 .list-header {
-    padding: 0 45px;
+  padding: 0 45px;
 }
 
 .item-list {
-    padding-left: 8px;
-    overflow: auto;
-    height: 100%;
-    margin-block-start: 0;
-    padding-inline-end: 5px;
+  padding-left: 8px;
+  overflow: auto;
+  height: 100%;
+  margin-block-start: 0;
+  padding-inline-end: 5px;
 }
 
 .item {
-    width: 100%;
-    cursor: pointer;
-    list-style: none;
-    background: #f2f2f2;
-    border-radius: 3px;
-    padding: 10px 15px;
-    cursor: default;
-    overflow: hidden;
-    word-wrap: break-word;
+  width: 100%;
+  cursor: pointer;
+  list-style: none;
+  background: #f2f2f2;
+  border-radius: 3px;
+  padding: 10px 15px;
+  cursor: default;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
 .item.is-done {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .item-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 
@@ -74,82 +73,85 @@ body {
     https://www.w3schools.com/howto/howto_css_custom_checkbox.asp*/
 
 .checkbox-container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 
 /* Hide the browser's default checkbox */
 
 .checkbox-container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
 
 /* Create a custom checkbox */
 
 .checkmark {
-    position: absolute;
-    top: -8px;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
+  position: absolute;
+  top: -8px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
 }
 
 
 /* On mouse-over, add a grey background color */
 
 .checkbox-container:hover input~.checkmark {
-    background-color: #ccc;
+  background-color: #ccc;
 }
 
 
 /* When the checkbox is checked, add a blue background */
 
 .checkbox-container input:checked~.checkmark {
-    background-color: #2196F3;
+  background-color: #2196F3;
 }
 
 
 /* Create the checkmark/indicator (hidden when not checked) */
 
 .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
+  content: "";
+  position: absolute;
+  display: none;
 }
 
 
 /* Show the checkmark when checked */
+
+
 /* General sibling combinator  */
+
 .checkbox-container input:checked~.checkmark:after {
-    display: block;
+  display: block;
 }
 
 
 /* Style the checkmark/indicator */
 
 .checkbox-container .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }

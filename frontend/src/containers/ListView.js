@@ -55,7 +55,7 @@ export default function ListView() {
     <div className="app-container">
       <div className="list-container">
         <ListHeader />
-        {errorText !== "" && <p data-testid="error-text">{errorText}</p>}
+        {errorText && <p data-testid="error-text">{errorText}</p>}
         <ul className="item-list">
           {toDoList.map((item) => (
             <ListItem
