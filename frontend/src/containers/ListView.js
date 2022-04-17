@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import ListHeader from "../components/ListHeader";
 import ListItem from "../components/ListItem";
 
+const BACKEND_PORT = process.env.REACT_APP_BACKEND_PORT || 3001;
+
 export default function ListView() {
   const [toDoList, setToDoList] = useState([]);
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
     async function getToDoList() {
-      await fetch(`http://localhost:3001/`)
+      await fetch(`http://localhost:${BACKEND_PORT}/`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -30,7 +32,7 @@ export default function ListView() {
   }, []);
 
   const updateTaskStatus = async (taskId) => {
-    await fetch(`http://localhost:3001/update/${taskId}`, {
+    await fetch(`http://localhost:${BACKEND_PORT}/update/${taskId}`, {
       method: "POST",
     })
       .then((response) => {
@@ -53,7 +55,7 @@ export default function ListView() {
     <div className="app-container">
       <div className="list-container">
         <ListHeader />
-        <p data-testid="error-text">{errorText}</p>
+        {errorText !== "" && <p data-testid="error-text">{errorText}</p>}
         <ul className="item-list">
           {toDoList.map((item) => (
             <ListItem

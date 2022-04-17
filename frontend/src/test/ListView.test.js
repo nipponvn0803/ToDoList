@@ -5,6 +5,7 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import ListView from "../containers/ListView";
+const BACKEND_PORT = process.env.REACT_APP_BACKEND_PORT || 3001;
 
 const mockToDoList = [
   {
@@ -30,19 +31,25 @@ const mockToDoList = [
 ];
 
 const server = setupServer(
-  rest.get("http://localhost:3001/", (req, res, ctx) => {
-    return res(ctx.json(mockToDoList));
-  }),
+  rest.get(
+    `http://localhost:${BACKEND_PORT}/`,
+    (req, res, ctx) => {
+      return res(ctx.json(mockToDoList));
+    }
+  ),
 
-  rest.post("http://localhost:3001/update/1", (req, res, ctx) => {
-    return res(
-      ctx.json(
-        mockToDoList.map((object) =>
-          object.id === 1 ? { ...object, done: !object.done } : object
+  rest.post(
+    `http://localhost:${BACKEND_PORT}/update/1`,
+    (req, res, ctx) => {
+      return res(
+        ctx.json(
+          mockToDoList.map((object) =>
+            object.id === 1 ? { ...object, done: !object.done } : object
+          )
         )
-      )
-    );
-  })
+      );
+    }
+  )
 );
 
 // Enable API mocking before tests.
@@ -97,14 +104,17 @@ describe("Handle server error", () => {
   it("GET method error", async () => {
     //   mock an error response
     server.use(
-      rest.get("http://localhost:3001/", (req, res, ctx) => {
-        return res(
-          ctx.status(501),
-          ctx.json({
-            errorMessage: "Something wrong",
-          })
-        );
-      })
+      rest.get(
+        `http://localhost:${BACKEND_PORT}/`,
+        (req, res, ctx) => {
+          return res(
+            ctx.status(501),
+            ctx.json({
+              errorMessage: "Something wrong",
+            })
+          );
+        }
+      )
     );
 
     render(<ListView />);
@@ -119,14 +129,17 @@ describe("Handle server error", () => {
 
   it("POST method error", async () => {
     server.use(
-      rest.post("http://localhost:3001/update/1", (req, res, ctx) => {
-        return res(
-          ctx.status(501),
-          ctx.json({
-            errorMessage: "Something wrong",
-          })
-        );
-      })
+      rest.post(
+        `http://localhost:${BACKEND_PORT}/update/1`,
+        (req, res, ctx) => {
+          return res(
+            ctx.status(501),
+            ctx.json({
+              errorMessage: "Something wrong",
+            })
+          );
+        }
+      )
     );
 
     render(<ListView />);

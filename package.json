@@ -1,0 +1,22 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "To do list app with react, node and express",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd backend && npm run start\" \"cd frontend && npm start\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nipponvn0803/ToDoList.git"
+  },
+  "author": "Trinh Son",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nipponvn0803/ToDoList/issues"
+  },
+  "homepage": "https://github.com/nipponvn0803/ToDoList#readme",
+  "dependencies": {
+    "concurrently": "^7.1.0"
+  }
+}
