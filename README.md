@@ -1,6 +1,9 @@
 # ToDoList
+
 Simple To do list app built with React, Nodejs and express
+
 ## Deploy locally
+
 To run this project locally, first, clone the project:
 
 ```shell
@@ -30,33 +33,37 @@ The client will be displayed at port 3000 while the server will be listening at 
 ```
 .
 ├── backend
-│   ├── index.js              # Entry point
+│   ├── index.js                        # Entry point
 │   ├── server
-│   │   └── index.js          # Middlewares
+│   │   └── index.js                    # Middlewares
 │   ├── routes
-│   │    └── index.js         # Express routing (URI and HTTP request)
+│   │    └── index.js                   # Express routing (URI and HTTP request)
 │   ├── src
-│   │   └── toDoList.json     # Initial tasks source
-│   └── test                  # Tests
+│   │   └── toDoList.json               # Initial tasks source
+│   └── test                            # Tests
 │
 └── frontend
     ├── src
-    │   ├── index.js          # Entry point, application is mounted
-    │   ├── App.js            # Render ListView 
+    │   ├── index.js                    # Entry point, application is mounted
+    │   ├── App.js                      # Render ListView
     │   ├── containers
-    │   │   └── ListView.js   # Fetch API to connect with server, error message and mapping tasks as a list
+    │   │   └── ListView.js             # Error message and mapping tasks as a list
     │   ├── components
-    │   │   ├── ListHeader.js # Simple header text
-    │   │   └── ListItem.js   # Render list item with checkbox, text
-    │   ├── App.css           # CSS rules
-    │   └── test              # Tests
+    │   │   ├── ListHeader.js           # Simple header text
+    │   │   └── ListItem.js             # Render list item with checkbox, text
+    │   ├── contexts
+    │   │   └── ToDoListContext.js      # Fetch API to connect with server and set the context
+    │   ├── App.css                     # CSS rules
+    │   └── test                        # Tests
     │
-    └── assets                # Background image
-        
-```        
+    └── assets                          # Background image
+
+```
 
 ## Testing
+
 To run test with coverage:
+
 - In frontend
 
 ```shell

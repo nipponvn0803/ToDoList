@@ -1,10 +1,10 @@
-// test/LoginForm.test.js
 import "@testing-library/jest-dom";
 import React from "react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import ListView from "../containers/ListView";
+import App from "../App";
+
 const BACKEND_PORT = process.env.REACT_APP_BACKEND_PORT || 3001;
 
 const mockToDoList = [
@@ -31,25 +31,19 @@ const mockToDoList = [
 ];
 
 const server = setupServer(
-  rest.get(
-    `http://localhost:${BACKEND_PORT}/`,
-    (req, res, ctx) => {
-      return res(ctx.json(mockToDoList));
-    }
-  ),
+  rest.get(`http://localhost:${BACKEND_PORT}/`, (req, res, ctx) => {
+    return res(ctx.json(mockToDoList));
+  }),
 
-  rest.post(
-    `http://localhost:${BACKEND_PORT}/update/1`,
-    (req, res, ctx) => {
-      return res(
-        ctx.json(
-          mockToDoList.map((object) =>
-            object.id === 1 ? { ...object, done: !object.done } : object
-          )
+  rest.post(`http://localhost:${BACKEND_PORT}/update/1`, (req, res, ctx) => {
+    return res(
+      ctx.json(
+        mockToDoList.map((object) =>
+          object.id === 1 ? { ...object, done: !object.done } : object
         )
-      );
-    }
-  )
+      )
+    );
+  })
 );
 
 // Enable API mocking before tests.
@@ -62,7 +56,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 it("Loads and displays to do tasks", async () => {
-  render(<ListView />);
+  render(<App />);
 
   expect(screen.getByTestId("list-header")).toHaveTextContent("To do list");
   const itemContainers = await screen.findAllByTestId("item-container");
@@ -72,7 +66,7 @@ it("Loads and displays to do tasks", async () => {
 
 describe("Update tasks status", () => {
   it("Can update tasks status by clicking checkbox", async () => {
-    render(<ListView />);
+    render(<App />);
 
     const itemCheckBoxes = await screen.findAllByTestId("item-checkbox");
     // the first task should not be checked
@@ -87,7 +81,7 @@ describe("Update tasks status", () => {
   });
 
   it("Can update tasks status by clicking text", async () => {
-    render(<ListView />);
+    render(<App />);
 
     const itemTexts = await screen.findAllByTestId("item-text");
     // the first task should not have class is-done
@@ -104,20 +98,17 @@ describe("Handle server error", () => {
   it("GET method error", async () => {
     //   mock an error response
     server.use(
-      rest.get(
-        `http://localhost:${BACKEND_PORT}/`,
-        (req, res, ctx) => {
-          return res(
-            ctx.status(501),
-            ctx.json({
-              errorMessage: "Something wrong",
-            })
-          );
-        }
-      )
+      rest.get(`http://localhost:${BACKEND_PORT}/`, (req, res, ctx) => {
+        return res(
+          ctx.status(501),
+          ctx.json({
+            errorMessage: "Something wrong",
+          })
+        );
+      })
     );
 
-    render(<ListView />);
+    render(<App />);
 
     // should now should error message
     await waitFor(() =>
@@ -142,7 +133,7 @@ describe("Handle server error", () => {
       )
     );
 
-    render(<ListView />);
+    render(<App />);
 
     const itemCheckBoxes = await screen.findAllByTestId("item-checkbox");
 
